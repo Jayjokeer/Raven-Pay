@@ -4,11 +4,11 @@
   "description": "A fintech API",
   "main": "index.js",
   "scripts": {
-      "build": "tsc -p .",
-      "dev": "nodemon --legacy-watch --watch './src/**/*.ts' --exec 'ts-node' ./src/server.ts",
-      "start": "node  --max-old-space-size=4024 ./dist/src/server.js",
-      "migrate:latest": "knex migrate:latest --knexfile knexfile.ts",
-      "migrate:rollback": "knex migrate:rollback --knexfile knexfile.ts"
+    "build": "tsc -p .",
+    "dev": "nodemon --legacy-watch --watch './src/**/*.ts' --exec 'ts-node' ./src/server.ts",
+    "start": "node  --max-old-space-size=4024 ./dist/src/server.js",
+    "migrate:latest": "knex migrate:latest --knexfile knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile knexfile.ts"
   },
   "author": "",
   "license": "ISC",
@@ -30,5 +30,4 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
   }
-  
 }
