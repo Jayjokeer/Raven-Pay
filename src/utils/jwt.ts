@@ -16,6 +16,7 @@ export const generateJWTwithExpiryDate = (
 export const verifyJWT = (token: string) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET!) as IUser;
+    console.log(payload)
     return payload;
   } catch (err) {
     if (err instanceof jwt.TokenExpiredError) {

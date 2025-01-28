@@ -8,12 +8,12 @@ import { generateJWTwithExpiryDate } from "../utils/jwt";
 import * as authService from "../services/auth.service";
 export const registerUserController = catchAsync( async (req: Request, res: Response) => {
    try{
-
-   
     const {
-      name,
+      first_name,
+      last_name,
       email,
       password,
+      phone,
     } = req.body;
 
     const isEmailExists = await authService.checkEmailExists(email);
@@ -22,9 +22,11 @@ export const registerUserController = catchAsync( async (req: Request, res: Resp
     const encryptPwd = await hashPassword(password);
 
     const userPayload= {
-      name,
+      first_name,
+      last_name,
       email: email.toLowerCase(),
       password: encryptPwd,
+      phone
     }
     const user = await authService.createUser(userPayload);
 

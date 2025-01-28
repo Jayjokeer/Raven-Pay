@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import {AuthRoute} from './authRoutes';
-// import transactionRoutes from './transactionRoutes';
+import { AccountRoute } from './accountRoutes';
+import { TransactionRoute } from './transactionRoutes';
 
 const router = Router();
 router.use('/auth',  AuthRoute);
-// router.use('/transactions', transactionRoutes);
+router.use('/account',AccountRoute);
+router.use('/transactions',  TransactionRoute);
 export default router;

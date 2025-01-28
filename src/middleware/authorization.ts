@@ -1,4 +1,4 @@
-import { NextFunction } from "express";
+import { NextFunction, Request, Response  } from "express";
 import { StatusCodes } from "http-status-codes";
 import { JwtPayload } from "jsonwebtoken";
 import { UnauthorizedError } from "../errors/error";
@@ -18,7 +18,6 @@ export const userAuth = async (req: JwtPayload, res: Response, next: NextFunctio
   
     try {
       const decode = verifyJWT(token);
-  
       if (!decode || !decode.email) {
         throw new UnauthorizedError("Authentication Failure");
       }
@@ -29,12 +28,7 @@ export const userAuth = async (req: JwtPayload, res: Response, next: NextFunctio
         throw new UnauthorizedError("No user found");
       }
   
-      if (!user.isEmailVerified) {
-        throw new UnauthorizedError("Access Denied! Your account is disabled, please contact admin.");
-      }
-  
       req.user = user;
-      
       next();
       
     } catch (error) {

@@ -9,19 +9,25 @@ import * as authService from "../services/auth.service";
 import * as accountService from "../services/account.services";
 import { JwtPayload } from "jsonwebtoken";
 
-export const generateAccount = catchAsync( async (req: JwtPayload, res: Response): Promise<void> => {
-    const {email}= req.user.email;
+
+export const generateAccountController = catchAsync( async (req: JwtPayload, res: Response): Promise<void> => {
+    const email= req.user.email;
   
     try {
       const existingAccount = await accountService.isExsitingAccount(email);
       if (existingAccount) {
         throw new BadRequestError('Account already exists');
       }
-  
-      const accountNumber = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
-  
-    const account =  await accountService.createAccount(req.user.id, accountNumber);  
-  
+  const user = await authService.checkEmailExists(email);
+    //   const accountNumber = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+    const accountDetails =  await accountService.generateBankAccount({
+        first_name: user.first_name,
+        last_name: user.last_name,
+        phone: user.phone,
+        email: user.email
+    })
+        const {account_number, account_name, bank} = accountDetails.data;
+    const account =  await accountService.createAccount(req.user.id, account_number, account_name, bank);  
        successResponse(res,StatusCodes.CREATED, account);
     } catch (error) {
       console.error('Error creating account:', error);
@@ -29,4 +35,3 @@ export const generateAccount = catchAsync( async (req: JwtPayload, res: Response
     }
   });
 
-  

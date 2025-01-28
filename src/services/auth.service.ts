@@ -7,7 +7,7 @@ return await knex('users').where({ email }).first();
 export const createUser = async (userPayload: any) => {
 const [user] = await knex('users').insert(
     userPayload,
-        ['id', 'name', 'email']
+        ['id', 'first_name', 'email','last_name', 'phone']
       );(user);
 
       return user;
