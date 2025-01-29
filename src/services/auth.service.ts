@@ -12,3 +12,8 @@ const [user] = await knex('users').insert(
 
       return user;
 };
+
+export const fetchUserById = async (id: number)=>{
+  return await knex('users').where({ id }).first();
+
+}

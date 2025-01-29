@@ -36,5 +36,9 @@ export const  generateBankAccount = async (userData: any) =>{
     } catch (error: any) {
       console.error('Raven Bank API Error:', error.response?.data || error.message);
       throw new Error('Failed to generate bank account');
-    }
-  }
+    } 
+  };
+export const fetchAccountByAccNumber = async (accountNumber: string)=>{
+  return await knex('accounts').where({ account_number: accountNumber}).first();
+
+}

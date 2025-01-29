@@ -3,3 +3,8 @@ export enum TransactionType {
     WITHDRAWAL = "withdrawal",
     TRANSFER = "transfer"
   };
+export enum TransactionStatus {
+    PENDING = "pending",
+    SUCCESS = "success",
+    FAILED = "failed"
+}

@@ -8,6 +8,10 @@ export async function up(knex: Knex): Promise<void> {
       table.string('type').notNullable(); // 'deposit', 'transfer', 'withdrawal'
       table.decimal('amount', 15, 2).notNullable();
       table.string('reference').notNullable();
+      table.string('description').notNullable();
+      table.string('status').notNullable();
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE');
+
       table.timestamps(true, true);
     });
   }

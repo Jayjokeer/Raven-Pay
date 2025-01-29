@@ -19,7 +19,6 @@ export const generateAccountController = catchAsync( async (req: JwtPayload, res
         throw new BadRequestError('Account already exists');
       }
   const user = await authService.checkEmailExists(email);
-    //   const accountNumber = `${Math.floor(1000000000 + Math.random() * 9000000000)}`;
     const accountDetails =  await accountService.generateBankAccount({
         first_name: user.first_name,
         last_name: user.last_name,
